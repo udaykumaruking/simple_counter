@@ -27,11 +27,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int counter = 0;
 
-  void _incrementCounter() {
+  void incrementCounter() {
     setState(() {
-      _counter++;
+      counter++;
+      print(counter);
+    });
+  }
+
+  void decrementCounter() {
+    setState(() {
+      counter--;
+      print(counter);
+    });
+  }
+
+  void resetCounter() {
+    setState(() {
+      counter = 0;
+      print(counter);
     });
   }
 
@@ -58,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 20,
             ),
             Text(
-              '$_counter',
+              '$counter',
               style: TextStyle(
                 fontSize: 80,
                 fontWeight: FontWeight.bold,
@@ -71,15 +86,15 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                OutlinedButtonn('DECREASE'),
+                OutlinedButtonn('DECREASE', decrementCounter),
                 SizedBox(
                   width: 15,
                 ),
-                OutlinedButtonn('RESET'),
+                OutlinedButtonn('RESET', resetCounter),
                 SizedBox(
                   width: 15,
                 ),
-                OutlinedButtonn('INCREASE'),
+                OutlinedButtonn('INCREASE', incrementCounter),
               ],
             )
           ],
@@ -91,11 +106,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class OutlinedButtonn extends StatelessWidget {
   final text;
-  OutlinedButtonn(this.text);
+  final funt;
+  OutlinedButtonn(this.text, this.funt);
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-        onPressed: () => {},
+        onPressed: () => funt,
         child: Text(
           text,
           style: TextStyle(
